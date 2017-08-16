@@ -1,0 +1,76 @@
+{% extends '../shared/layoutAdmin.html' %}
+
+{% block content %}
+
+<link href="/libs/fuelux/dist/css/fuelux.min.css" rel="stylesheet"/>
+<link href="/libs/sweetalert/dist/sweetalert.css" rel="stylesheet"/>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-8">
+        <h2>缓存管理</h2>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeIn">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="ibox m-t-xl">
+                <div class="row">
+                    <div class="col-md-10">
+                        <div id="keyinput" data-initialize="combobox" class="input-group input-append dropdown combobox">
+                            <input id="cacheKey" type="text" placeholder='缓存key' class="form-control"/>
+                            <div class="input-group-btn">
+                                <button type="button" data-toggle="dropdown" class="btn btn-white dropdown-toggle"><span class="caret"></span></button>
+                                <ul style="left:auto;" class="dropdown-menu dropdown-menu-right">
+                                    <li data-value="categories">
+                                        <a href="#">【文章分类】</a>
+                                    </li>
+                                    <li data-value="categories_all">
+                                        <a href="#">【文章分类（含全部分类和未分类）】</a>
+                                    </li>
+                                    <li data-value="category_分类alias">
+                                        <a href="#">【由alias获取分类】</a>
+                                    </li>
+                                    <li data-value="posts_cateid_分类id_pageindex_页码_pagesize_每页条数_sortby_排序类型_keyword_关键字_filtertype_查询类型">
+                                        <a href="#">【文章列表数据】_分类id_页码_每页条数_排序类型_关键字_查询类型</a>
+                                    </li>
+                                    <li data-value="posts_count_cateid_分类id_pageindex_页码_pagesize_每页条数_sortby_排序类型_keyword_关键字_filtertype_查询类型">
+                                        <a href="#">【文章列表条数】_分类_页码_每页条数_排序类型_关键字_查询类型</a>
+                                    </li>
+                                    <li data-value="article_文章alias">
+                                        <a href="#">【由alias获取文章】</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 text-right">
+                        <button id="btnQuery" type="button" class="btn btn-white">
+                            <i class="fa fa-search"></i> 检索缓存
+                        </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <textarea id="cacheContent" rows="20" style="max-width:100%;min-width:100%;" class="form-control m-t-sm"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <button id="btnClear" type="button" class="btn btn-primary m-t-sm">
+                            <i class="fa fa-times"></i> 清除缓存
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/libs/jquery/dist/jquery.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/bootstrap/dist/js/bootstrap.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/metisMenu/dist/metisMenu.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/js/admin.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/fuelux/dist/js/fuelux.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/sweetalert/dist/sweetalert.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/js/cachemanage.js" charset="utf-8"></script>
+
+{% endblock %}
+

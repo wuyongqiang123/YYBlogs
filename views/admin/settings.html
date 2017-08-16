@@ -1,0 +1,209 @@
+{% extends '../shared/layoutAdmin.html' %}
+
+{% block content %}
+
+<link href="/libs/fuelux/dist/css/fuelux.min.css" rel="stylesheet"/>
+<link href="/libs/blueimp-file-upload/css/jquery.fileupload.css" rel="stylesheet"/>
+<link href="/libs/switchery/dist/switchery.min.css" rel="stylesheet"/>
+<link href="/libs/sweetalert/dist/sweetalert.css" rel="stylesheet"/>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-8">
+        <h2>系统设置</h2>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeIn">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <form id="postForm" action="/admin/saveSettings" method="post">
+                        <div role="tablist" aria-multiselectable="false" class="panel-group">
+                            <div class="row">
+                                <div style="margin-bottom:10px;" class="col-md-6">
+                                    <div class="panel panel-default">
+                                        <div id="headingSite" role="tab" class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a role="button" data-toggle="collapse" href="#tabSite" aria-expanded="true" aria-controls="tabSite">站点设置</a>
+                                            </h4>
+                                        </div>
+                                        <div id="tabSite" role="tabpanel" aria-labelledby="headingSite" class="panel-collapse collapse in">
+                                            <ul class="list-group">
+                                                <li class="list-group-item clearfix">
+                                                    <div class="pull-left">网站名称</div>
+                                                    <div class="pull-right">
+                                                        <input id="SiteName" type="text" name="SiteName" placeholder='该网站的名称' value="{{config.SiteName}}" class="form-control"/>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item clearfix">
+                                                    <div class="pull-left">网站域名</div>
+                                                    <div class="pull-right">
+                                                        <input id="SiteDomain" type="text" name="SiteDomain" placeholder='该网站的域名' value="{{config.SiteDomain}}" class="form-control"/>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item clearfix">
+                                                    <div class="pull-left">备案号（用于底部显示）</div>
+                                                    <div class="pull-right">
+                                                        <input id="RecordNo" type="text" name="RecordNo" placeholder='网站域名的备案号' value="{{config.RecordNo}}" class="form-control"/>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item clearfix">
+                                                    <div class="pull-left">网站logo</div>
+                                                    <div class="pull-right">
+                                                        <span class="fileinput-button">
+                                                            <img alt="profile" src="{{config.LogoPath}}" style="width:146px;height:146px;" class="img-circle profile-img"/>
+                                                            <input type="file" name="file" class="fileupload"/>
+                                                            <input id="LogoPath" type="hidden" name="LogoPath" value="{{config.LogoPath}}"/>
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item clearfix">
+                                                    <div class="pull-left">每页显示文章数</div>
+                                                    <div class="pull-right">
+                                                        <div data-initialize="spinbox" data-step="5" class="spinbox">
+                                                            <input id="PageSize" type="text" name="PageSize" placeholder='每页的条数' value="{{config.PageSize}}" class="form-control input-mini spinbox-input"/>
+                                                            <div class="spinbox-buttons btn-group btn-group-vertical">
+                                                                <button type="button" class="btn btn-white spinbox-up btn-xs">
+                                                                    <span class="fa fa-chevron-up"></span>
+                                                                    <span class="sr-only">Increase</span>
+                                                                </button>
+                                                                <button type="button" class="btn btn-white spinbox-down btn-xs">
+                                                                    <span class="fa fa-chevron-down"></span>
+                                                                    <span class="sr-only">Decrease</span>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item clearfix">
+                                                    <div class="pull-left">默认展开文章目录</div>
+                                                    <div class="pull-right">
+                                                        <input id="ExpandMenu" type="hidden" name="ExpandMenu" value="{{config.ExpandMenu}}"/>
+                                                        <input type="checkbox" checked="{{config.ExpandMenu}}" class="js-switch"/>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item clearfix">
+                                                    <div class="pull-left">缓存过期时间（秒）</div>
+                                                    <div class="pull-right">
+                                                        <div data-initialize="spinbox" data-max="9999999" class="spinbox">
+                                                            <input id="CacheExpired" type="text" name="CacheExpired" placeholder='缓存过期时间' value="{{config.CacheExpired}}" class="form-control input-mini spinbox-input"/>
+                                                            <div class="spinbox-buttons btn-group btn-group-vertical">
+                                                                <button type="button" class="btn btn-white spinbox-up btn-xs">
+                                                                    <span class="fa fa-chevron-up"></span>
+                                                                    <span class="sr-only">Increase</span>
+                                                                </button>
+                                                                <button type="button" class="btn btn-white spinbox-down btn-xs">
+                                                                    <span class="fa fa-chevron-down"></span>
+                                                                    <span class="sr-only">Decrease</span>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="margin-bottom:10px;" class="col-md-6">
+                                    <div class="panel panel-default">
+                                        <div id="headingComponent" role="tab" class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a role="button" data-toggle="collapse" href="#tabComponent" aria-expanded="true" aria-controls="tabComponent">组件设置</a>
+                                            </h4>
+                                        </div>
+                                        <div id="tabComponent" role="tabpanel" aria-labelledby="headingComponent" class="panel-collapse collapse in">
+                                            <ul class="list-group">
+                                                <li class="list-group-item clearfix">
+                                                    <div class="pull-left">
+                                                        <a href="http://api.fanyi.baidu.com" target="_blank"> 百度翻译
+                                                        </a>
+                                                        key（用于文章Url显示）
+                                                    </div>
+                                                    <div class="pull-right">
+                                                        <input id="TranslateKey" type="text" name="TranslateKey" placeholder='申请的翻译key' value="{{config.TranslateKey}}" class="form-control"/>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item clearfix">
+                                                    <div class="pull-left">启用统计功能（<a href="http://tongji.baidu.com" target="_blank">百度统计</a>）</div>
+                                                    <div class="pull-right">
+                                                        <input id="EnableStatistics" type="hidden" name="EnableStatistics" value="{{config.EnableStatistics}}"/>
+                                                        <input type="checkbox" checked="{{config.EnableStatistics}}" class="js-switch"/>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item clearfix">
+                                                    <div class="pull-left">百度统计id</div>
+                                                    <div class="pull-right">
+                                                        <input id="StatisticsId" type="text" name="StatisticsId" placeholder='申请的统计id' value="{{config.StatisticsId}}" class="form-control"/>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item clearfix">
+                                                    <div class="pull-left">启用分享功能（<a href="http://www.jiathis.com/" target="_blank">JisThis</a>）</div>
+                                                    <div class="pull-right">
+                                                        <input id="EnableShare" type="hidden" name="EnableShare" value="{{config.EnableShare}}"/>
+                                                        <input type="checkbox" checked="{{config.EnableShare}}" class="js-switch"/>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item clearfix">
+                                                    <div class="pull-left">JiaThis分享id</div>
+                                                    <div class="pull-right">
+                                                        <input id="JiaThisId" type="text" name="JiaThisId" placeholder='申请的分享id' value="{{config.JiaThisId}}" class="form-control"/>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item clearfix">
+                                                    <!--（<a href="http://changyan.kuaizhan.com" target="_blank">畅言</a>）-->
+                                                    <div class="pull-left">显示文章评论</div>
+                                                    <div class="pull-right">
+                                                        <input id="ShowComments" type="hidden" name="ShowComments" value="{{config.ShowComments}}"/>
+                                                        <input type="checkbox" checked="{{config.ShowComments}}" class="js-switch"/>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item clearfix">
+                                                    <div class="pull-left">显示留言(首页)</div>
+                                                    <div class="pull-right">
+                                                        <input id="ShowGuestbook" type="hidden" name="ShowGuestbook" value="{{config.ShowGuestbook}}"/>
+                                                        <input type="checkbox" checked="{{config.ShowGuestbook}}" class="js-switch"/>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item clearfix">
+                                                    <div class="pull-left">畅言appid</div>
+                                                    <div class="pull-right">
+                                                        <input id="ChangyanId" type="text" name="ChangyanId" placeholder='申请的appid' value="{{config.ChangyanId}}" class="form-control"/>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item clearfix">
+                                                    <div class="pull-left">畅言conf</div>
+                                                    <div class="pull-right">
+                                                        <input id="ChangyanConf" type="text" name="ChangyanConf" placeholder='申请的conf' value="{{config.ChangyanConf}}" class="form-control"/>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button id="btnSave" type="button" role="button" class="btn btn-primary">
+                                        <i class="fa fa-cloud-upload"></i> 保存修改
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/libs/jquery/dist/jquery.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/bootstrap/dist/js/bootstrap.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/metisMenu/dist/metisMenu.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/js/admin.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/blueimp-file-upload/js/vendor/jquery.ui.widget.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/blueimp-file-upload/js/jquery.fileupload.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/fuelux/dist/js/fuelux.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/sweetalert/dist/sweetalert.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/switchery/dist/switchery.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/js/settings.js" charset="utf-8"></script>
+
+{% endblock %}
+

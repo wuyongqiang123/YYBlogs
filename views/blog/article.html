@@ -1,0 +1,123 @@
+{% extends '../shared/layout.html' %}
+
+{% block content %}
+<link href="/css/animate-custom.css" rel="stylesheet"/>
+<link href="/css/railscasts.css" rel="stylesheet"/>
+<link href="/libs/lightbox2/dist/css/lightbox.min.css" rel="stylesheet"/>
+<div class="detail-container">
+    <div class="container">
+        <div class="row">
+            {% if config.ExpandMenu %}
+            <article class="col-sm-12 col-xs-12 detail-wrap post-content animated fadeIn col-md-9">
+            {% else %}
+            <article class="col-sm-12 col-xs-12 detail-wrap post-content animated fadeIn col-md-12">
+            {% endif %}
+                <button title='显示目录' class="btn btn-white btn-menu">
+                    <i class="fa fa-align-justify"></i>
+                </button>
+                <div class="font-controller hidden-sm hidden-xs">
+                    <div title="缩小字体" class="btn-font btn-font-minus">A-</div>
+                    <div title="增大字体" class="btn-font btn-font-plus">A+</div>
+                </div>
+                <div class="hidden-sm hidden-xs">
+                    <div class="text-muted pull-left">
+                        <span title='文章分类'>
+                            <i class="fa fa-map-signs"></i>
+                            <a href="/blog/{{post.CategoryAlias}}" target="_blank" class="black-link">{{post.CateName}}</a>
+                        </span></div>
+                    <div class="text-muted pull-right">
+                        {% for label in post.LabelList %}
+                        <span class="post-label" title="{{label}}">{{label}}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <header class="text-center post-title">
+                    <span title='发布时间' class="text-muted">
+                        <i class="fa fa-clock-o"></i> {{post.CreateTimeStr}}</span>
+                    <h1>{{post.Title}}</h1>
+                </header>
+                <div id="main-context">
+                    <blockquote>
+                        <h2>摘要</h2>
+                        <span>：{{post.Summary}}</span>
+                    </blockquote>
+                    {% autoescape false %}{{ post.Content }}{% endautoescape %}
+                </div>
+                {% if config.ShowComments %}
+                    <hr class="hr-article">
+                    <div id="SOHUCS" sid="{{post.UniqueId}}"></div>
+                    <script>
+                        (function () {
+                            var appid = '{{config.ChangyanId}}';
+                            var conf = '{{config.ChangyanConf}}';
+                            var width = window.innerWidth || document.documentElement.clientWidth;
+                            if (width < 960) {
+                                window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+                            } else {
+                                var loadJs = function (d, a) {
+                                    var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
+                                    var b = document.createElement("script");
+                                    b.setAttribute("type", "text/javascript");
+                                    b.setAttribute("charset", "UTF-8");
+                                    b.setAttribute("src", d);
+                                    if (typeof a === "function") {
+                                        if (window.attachEvent) {
+                                            b.onreadystatechange = function () {
+                                                var e = b.readyState;
+                                                if (e === "loaded" || e === "complete") {
+                                                    b.onreadystatechange = null;
+                                                    a()
+                                                }
+                                            }
+                                        } else {
+                                            b.onload = a
+                                        }
+                                    }
+                                    c.appendChild(b)
+                                };
+                                loadJs("http://changyan.sohu.com/upload/changyan.js", function () {
+                                    window.changyan.api.config({
+                                        appid: appid, conf: conf
+                                    })
+                                });
+                            }
+                        })();
+                    </script>
+                {% endif %}
+            </article>
+            {% if config.ExpandMenu %}
+            <div id="control-wrap" class="col-md-3 hidden-sm hidden-xs" style="display: block;">
+            {% else %}
+            <div id="control-wrap" class="col-md-3 hidden-sm hidden-xs" style="display: none;">
+            {% endif %}
+                <a class="close-menu" title='隐藏目录'>
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+        </div>
+        {% include "../shared/footer.html" %}
+    </div>
+</div>
+{% include "../shared/top.html" %}
+<script type="text/javascript" src="/libs/jquery/dist/jquery.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/bootstrap/dist/js/bootstrap.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/lightbox2/dist/js/lightbox.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/scrollNav/dist/jquery.scrollNav.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/js/highlight.pack.js" charset="utf-8"></script>
+<script type="text/javascript" src="/js/article.js" charset="utf-8"></script>
+<script>
+    var expandMenu = '{{config.ExpandMenu}}';
+    var logoPath = "{{config.LogoPath}}";
+    var jiathis_config = {
+        data_track_clickback: true,
+        url: window.location.href,
+        summary: "{{post.Summary}}",
+        title: "{{post.Title}}"
+    };
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid={{config.JiaThisId}}" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/jquery-qrcode/dist/jquery.qrcode.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/js/top.js" charset="utf-8"></script>
+
+{% endblock %}
