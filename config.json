@@ -1,5 +1,5 @@
 {
-  "DbPath": "mongodb://localhost:27018/blog",
+  "DbPath": "mongodb://yqblogs:wuguokgdjs@ds011218.mlab.com:11218/user",
   "Redis": {
     "Active": false,
     "Host": "127.0.0.1",
