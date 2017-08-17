@@ -2,9 +2,9 @@
 
 {% block content %}
 
-<link href="/public/css/selectlist.css" rel="stylesheet"/>
-<link href="/public/libs/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
-<link href="/public/css/railscasts.css" rel="stylesheet"/>
+<link href="/css/selectlist.css" rel="stylesheet"/>
+<link href="/libs/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
+<link href="/css/railscasts.css" rel="stylesheet"/>
 
 <div class="container-fluid render-body">
     <div class="row">
@@ -83,7 +83,7 @@
                                                 <input id="FilterType" type="text" readonly="readonly" aria_hidden="true" name="FilterType" class="hidden hidden-field"/>
                                             </div>
                                         </div>
-                                        <input type="text" placeholder='{{blog.index.keyword}}' name="Keyword" id="Keyword" class="form-control">
+                                        <input type="text" placeholder='关键字' name="Keyword" id="Keyword" class="form-control">
                                         <div class="input-group-btn">
                                             <button id="btnFilter" type="button" class="btn btn-white">
                                                 <i class="fa fa-search"></i>
@@ -158,7 +158,7 @@
             title: "{{config.SiteName}}"
         };
     </script>
-    <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=@config.JiaThisId" charset="utf-8"></script>
+    <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid={{config.JiaThisId}}" charset="utf-8"></script>
     <script type="text/javascript" src="/libs/jquery-qrcode/dist/jquery.qrcode.min.js" charset="utf-8"></script>
     <script type="text/javascript" src="/js/top.js" charset="utf-8"></script>
 </div>

@@ -108,7 +108,7 @@ $(function () {
     });
 
     $(".list-top-left a").on("click", function () {
-        if (!$(this).hasClass("current")) {
+        // if ($(this).hasClass("current")) {
             $(this).addClass("current").siblings().removeClass("current");
             $(".list-wrap ol").html("");
             $("[data-toggle='tooltip']").tooltip("hide");
@@ -120,7 +120,7 @@ $(function () {
             $("#SortBy").val($(this).attr("sort"));
             $("#PageIndex").val(1);
             requestData();
-        }
+        // }
     });
 
     $("#Keyword").on("keypress", function (e) {

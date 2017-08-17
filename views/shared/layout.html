@@ -4,8 +4,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="@(model.keywords ? model.keywords : 'blog,iBlog')">
-    <meta name="description" content="@(model.description ? model.description : 'iBlog')">
+    {% if model.keywords %}
+    <meta name="keywords" content="{{model.keywords}}">
+    {% else %}
+    <meta name="keywords" content="blog,iBlog">
+    {% endif %}
+    {% if model.keywords %}
+    <meta name="description" content="{{model.description}}">
+    {% else %}
+    <meta name="description" content="iBlog">
+    {% endif %}
     <link href="/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/bootstrap-addon.css" rel="stylesheet">
     <link href="/css/site.css" rel="stylesheet">
