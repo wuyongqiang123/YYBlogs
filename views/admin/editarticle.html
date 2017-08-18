@@ -88,24 +88,12 @@
                             </div>
                         </div>
                         <div>
-                            {% if !post.IsDraft %}
                             <button id="btnUpdate" type="submit" class="btn btn-primary">
                                 <i class="fa fa-cloud-upload"></i> 更新
                             </button>
-                            <a href="/admin/articlemanage" class="btn btn-white">
+                            <a href="/admin/toolsmanage" class="btn btn-white">
                                 <i class="fa fa-reply"></i> 返回
                             </a>
-                            {% else %}
-                            <button id="btnPublish" type="submit" class="btn btn-danger">
-                                <i class="fa fa-send"></i> 发布
-                            </button>
-                            <button id="btnSave" type="button" class="btn btn-primary">
-                                <i class="fa fa-save"></i> 保存草稿
-                            </button>
-                            <a href="/admin/articlemanage" class="btn btn-white">
-                                <i class="fa fa-reply"></i> 返回"
-                            </a>
-                            {% endif %}
                             <input id="UniqueId" type="hidden" name="UniqueId" value="{{post._id}}"/>
                             <input id="IsDraft" type="hidden" name="IsDraft" value='{{post.IsDraft ? "True" : "False"}}'/>
                         </div>

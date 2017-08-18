@@ -24,7 +24,7 @@
 </head>
 <body class="fuelux">
 {% if model.isRoot %}
-    <link href="/css/home-loading.css" rel="stylesheet"/>
+    <link href="/public/css/home-loading.css" rel="stylesheet"/>
     <div id="home-loading" class="home-loading">
         <div id="loading-con" style="display:none;" class="loading-con">
             <div class="loading-circle"></div>
@@ -61,23 +61,24 @@
                         <i class="fa fa-file-text-o fa-fw"></i> 博客
                     </a>
                 </li>
-                    {% if config.ShowGuestbook == 'true' %}
-                    <li>
-                        <a href="/guestbook">
-                            <i class="fa fa-edit fa-fw"></i> 留言
-                        </a>
-                    </li>
-                    {% endif %}
+                <li>
+                    <a href="/tools">
+                        <i class="fa fa-flask fa-fw"></i>工具
+                    </a>
+                </li>
+                {% if config.ShowGuestbook == 'true' %}
+                <li>
+                    <a href="/guestbook">
+                         <i class="fa fa-edit fa-fw"></i> 留言
+                    </a>
+                </li>
+                {% endif %}
                 <li>
                     <a href="/about">
                         <i class="fa fa-user fa-fw"></i> 关于
                     </a>
                 </li>
-                <!--<li>-->
-                    <!--<a href="/locale/@__('lang-code')">-->
-                        <!--<i class="fa fa-language fa-fw"></i> @__("language")-->
-                    <!--</a>-->
-                <!--</li>-->
+
             </ul>
         </div>
     </div>

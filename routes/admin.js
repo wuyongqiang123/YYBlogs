@@ -5,6 +5,7 @@ var fs = require('fs');
 var async = require('async');
 var upload = require('jquery-file-upload-middleware');
 var post = require('../proxy/post');
+var tools = require('../proxy/tools');
 var category = require('../proxy/category');
 var log = require('../proxy/log');
 var tool = require('../utility/tool');
@@ -96,6 +97,7 @@ router.post('/getCateFilter', function (req, res, next) {
 
 //获取文章列表数据
 router.post('/getArticles', function (req, res, next) {
+    
     var filter,
         params = {
             pageIndex: req.body.pageNumber,
@@ -314,6 +316,90 @@ router.get('/comments', function (req, res, next) {
             res.render('admin/comments', {
                 config: settings,
                 title: settings['SiteName'] + ' - ' + res.__("layoutAdmin.comment_management")
+            });
+        }
+    });
+});
+//添加工具页面
+router.get('/newtools',function (req,res,next) {
+    tool.getConfig(path.join(__dirname, '../config/settings.json'), function (err, settings) {
+        if (err) {
+            next(err);
+        } else {
+            res.render('admin/newtools', {
+                uniqueId: shortid.generate(),
+                config: settings,
+                title: settings['SiteName'] + ' - ' + res.__("layoutAdmin.msg_management")
+            });
+        }
+    });
+});
+//保存工具页面
+router.post('/savetools',function (req,res,next) {
+    
+    var params = {
+        UniqueId: req.body.UniqueId,
+        Title: req.body.Title,
+        Summary: req.body.Summary,
+        Url: req.body.Url,
+        IsDraft: req.body.IsDraft
+    };
+    tools.save(params, function (err) {
+        if (err) {
+            next(err);
+        } else {
+            res.end();
+        }
+    })
+});
+//编辑工具页面
+router.get('/edittools',function (req,res,next) {
+    var id = req.query.id;
+    if (!id) {
+        res.redirect('/admin/toolsmanage');
+    }
+    tool.getConfig(path.join(__dirname, '../config/settings.json'), function (err, settings) {
+        if (err) {
+            next(err);
+        } else {
+            tools.getById(id, function (err,edittools) {
+                console.log(edittools);
+                res.render('admin/edittools', {
+                    config: settings,
+                    edittools: edittools,
+                    title: settings['SiteName'] + ' - ' + res.__("layoutAdmin.msg_management")
+                });
+            });
+        }
+    });
+});
+//删除工具页面
+router.get('/deletetools',function (req,res,next) {
+    var id = req.query.id;
+    if (!id) {
+        res.redirect('/admin/toolsmanage');
+    }
+    tools.delete(id, function (err) {
+        if (err) {
+            next(err);
+        } else {
+            res.redirect('/admin/toolsmanage');
+        }
+    })
+});
+
+//工具管理页面
+router.get('/toolsmanage',function (req,res,next) {
+    tool.getConfig(path.join(__dirname, '../config/settings.json'), function (err, settings) {
+        if (err) {
+            next(err);
+        } else {
+            tools.gettools(function (tools) {
+                res.render('admin/toolsmanage', {
+                    config: settings,
+                    tools: tools,
+                    title: settings['SiteName'] + ' - ' + res.__("layoutAdmin.msg_management")
+                });
             });
         }
     });

@@ -1,0 +1,61 @@
+{% extends '../shared/layoutAdmin.html' %}
+
+{% block content %}
+
+<link href="/libs/fuelux/dist/css/fuelux.min.css" rel="stylesheet"/>
+<link href="/libs/sweetalert/dist/sweetalert.css" rel="stylesheet"/>
+<link href="/libs/form.validation/dist/css/formValidation.min.css" rel="stylesheet"/>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-8">
+        <h2>编辑工具</h2>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeIn">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <form id="postForm" action="/admin/savetools" method="post">
+                        <div class="form-group">
+                            <label for="Title">标题</label>
+                            <input id="Title" type="text" name="Title" placeholder='请输入标题' value="{{edittools.Title}}" class="form-control"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Summary">摘要</label>
+                            <textarea id="Summary" name="Summary" style="min-width: 100%;max-width: 100%;" placeholder='请输入摘要' class="form-control">{{edittools.Summary}}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label style="display:block;">外链</label>
+                            <input id="Url" type="text" name="Url" value="{{edittools.Url}}" placeholder='请输入链接地址' class="form-control"/>
+                        </div>
+
+                        <div>
+                            <button id="btnPublish" type="submit" class="btn btn-danger">
+                                <i class="fa fa-send"></i> 更新
+                            </button>
+                            <!--<button id="btnSave" type="button" class="btn btn-primary">-->
+                                <!--<i class="fa fa-save"></i> 保存草稿-->
+                            <!--</button>-->
+                            <input id="UniqueId" type="hidden" name="UniqueId" value="{{edittools._id}}"/>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/libs/jquery/dist/jquery.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/bootstrap/dist/js/bootstrap.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/form.validation/dist/js/formValidation.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/form.validation/dist/js/framework/bootstrap.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/form.validation/dist/js/language/zh_CN.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/metisMenu/dist/metisMenu.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/js/admin.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/fuelux/dist/js/fuelux.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/sweetalert/dist/sweetalert.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/js-md5/js/md5.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/js/edittools.js" charset="utf-8"></script>
+
+{% endblock %}

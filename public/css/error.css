@@ -3,7 +3,7 @@
 }
 
 .back-img {
-    background-image: url(/public/images/ErrorBack.jpg);
+    background-image: url(/images/ErrorBack.jpg);
     background-position: center center;
     background-size: cover;
     height: 100%;

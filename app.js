@@ -77,7 +77,7 @@ app.use(function (req, res, next) {
 // error handlers
 app.use(function (err, req, res, next) {
     var code = err.status || 500,
-        message = code === 404 ? res.__('error.404_1') : res.__('error.404_2');
+        message = code === 404 ? "请求的页面已失联~系统已自动记录该错误。" : "服务器出错了~系统已自动记录该错误。";
     res.status(code);
     logger.errLogger(req, err);
     res.render('./shared/error', {

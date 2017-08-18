@@ -44,18 +44,14 @@
             </script>
         </div>
     </div>
-    {% block footer %}
-
-    {% endblock %}
+    {% include "../shared/footer.html" %}
 </div>
-{% block top %}
-
-{% endblock %}
+{% include "../shared/top.html" %}
 <script type="text/javascript" src="/libs/jquery/dist/jquery.min.js" charset="utf-8"></script>
 <script type="text/javascript" src="/libs/bootstrap/dist/js/bootstrap.min.js" charset="utf-8"></script>
 <script type="text/javascript" src="/js/guestbook.js" charset="utf-8"></script>
 <script>
-    var tools = [2];
+    var tools = [3];
 </script>
 <script type="text/javascript" src="/js/top.js" charset="utf-8"></script>
 {% endblock %}
